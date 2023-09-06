@@ -4,9 +4,6 @@ on:
   release:
     types: [created]
 
-permissions:
-  contents: write
-
 jobs:
   upload-versions:
     runs-on: ubuntu-latest
@@ -45,8 +42,11 @@ jobs:
           components: rustfmt, clippy
         # Set the current SHA as the version so that it's exposed on the server.
       - name: Install libssl-dev for ubuntu
-        run: sudo apt-get install build-essential pkg-config libssl-dev openssl libssl3
+        run: sudo apt-get install -y build-essential pkg-config libssl-dev openssl libssl3
         if: startsWith(matrix.os, 'ubuntu')
+      - name: Install libssl-dev for ubuntu
+        run: sudo dpkg --add-architecture arm64 && sudo apt-get update && sudo apt-get install -y build-essential:arm64 pkg-config:arm64 libssl-dev:arm64 openssl:arm64 libssl3:arm64
+        if: startsWith(matrix.os, 'ubuntu') && startsWith(matrix.target, '')
       - name: Install cross-compilation tools
         uses: taiki-e/setup-cross-toolchain-action@v1
         with:
