@@ -41,5 +41,8 @@ rocket = {version = "=0.5.0-rc.3", features = ["json"]}
 # For linux and macos, we need the vendored ssl (especially
 [target.'cfg(linux)'.dependencies]
 openssl = { version = "0.10.57", features = ["vendored"] }
+openssl-sys = { version = "0.9.93", features = ["vendored"] }
+
 [target.'cfg(macos)'.dependencies]
 openssl = { version = "0.10.57", features = ["vendored"] }
+openssl-sys = { version = "0.9.93", features = ["vendored"] }
