@@ -41,9 +41,6 @@ jobs:
           override: true
           components: rustfmt, clippy
         # Set the current SHA as the version so that it's exposed on the server.
-      - name: Install libssl-dev for ubuntu
-        run: sudo apt-get install -y build-essential pkg-config libssl-dev openssl libssl3
-        if: startsWith(matrix.os, 'ubuntu')
       - name: Install cross-compilation tools
         uses: taiki-e/setup-cross-toolchain-action@v1
         with:
